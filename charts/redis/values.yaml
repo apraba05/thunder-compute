@@ -1,0 +1,6 @@
+replicaCount: 1
+image:
+  repository: redis
+  tag: 7-alpine
+service:
+  port: 6379

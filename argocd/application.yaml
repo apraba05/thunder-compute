@@ -1,0 +1,44 @@
+# GitOps desired state: Redis allocation store + vgpu-scheduler.
+# Applied into the kind cluster's argocd namespace by run.sh.
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vgpu-redis
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/apraba05/startup-demos.git
+    targetRevision: HEAD
+    path: demos/summer-2024-thunder-compute/src/charts/redis
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vgpu
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vgpu-scheduler
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/apraba05/startup-demos.git
+    targetRevision: HEAD
+    path: demos/summer-2024-thunder-compute/src/charts/vgpu-scheduler
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vgpu
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

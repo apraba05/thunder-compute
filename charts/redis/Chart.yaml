@@ -1,0 +1,7 @@
+# Minimal Redis chart — allocation state for vgpu-scheduler.
+apiVersion: v2
+name: redis
+description: Single-replica Redis for vGPU allocation state
+type: application
+version: 0.1.0
+appVersion: "7"
